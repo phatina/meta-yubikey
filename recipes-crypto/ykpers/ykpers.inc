@@ -7,7 +7,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=422217170b70a9a94c32873055b486bb"
 
 DEPENDS += "\
-    libusb \
+    libusb1 \
     libyubikey \
     asciidoc-native \
     libxml2-native \
@@ -27,6 +27,6 @@ EXTRA_OECONF = "\
     --disable-rpath \
     --disable-silent-rules \
     --with-udevrulesdir=${sysconfdir}/udev/rules.d \
-    --with-backend=libusb"
+    --with-backend=libusb-1.0"
 
 inherit autotools

@@ -1,6 +1,6 @@
 include ${BPN}.inc
 
-DEFAULT_PREFERENCE = "2"
+DEFAULT_PREFERENCE = "-1"
 
 SRC_URI += "\
     git://github.com/Yubico/yubikey-personalization.git \

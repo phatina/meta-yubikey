@@ -6,12 +6,6 @@ SECTION = "security/token"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=82e429e9fd33c7ce9f12030aa107402d"
 
-DEPENDS += "\
-    asciidoc-native \
-    libxml2-native \
-    libxslt-native \
-"
-
-EXTRA_OECONF = "--disable-static --disable-silent-rules"
+EXTRA_OECONF = "--disable-static --disable-silent-rules --disable-documentation"
 
 inherit autotools

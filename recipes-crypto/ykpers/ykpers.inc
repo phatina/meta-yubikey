@@ -9,12 +9,6 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=422217170b70a9a94c32873055b486bb"
 DEPENDS += "\
     libusb1 \
     libyubikey \
-    asciidoc-native \
-    libxml2-native \
-    libxslt-native \
-    docbook-xml-dtd4-native \
-    docbook-xsl-stylesheets-native \
-    xmlto-native \
 "
 
 RDEPENDS_${PN} += "\
@@ -26,7 +20,9 @@ EXTRA_OECONF = "\
     --disable-static \
     --disable-rpath \
     --disable-silent-rules \
+    --disable-documentation \
     --with-udevrulesdir=${sysconfdir}/udev/rules.d \
-    --with-backend=libusb-1.0"
+    --with-backend=libusb-1.0 \
+"
 
-inherit autotools
+inherit autotools pkgconfig

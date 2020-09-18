@@ -2,6 +2,7 @@ include ${BPN}.inc
 
 SRC_URI += "\
     https://github.com/Yubico/yubikey-personalization/archive/v${PV}.tar.gz \
+    file://disable-documentation.patch \
 "
 
 SRC_URI[md5sum] = "cefb17521fe81069e6e5ad05f5a4ee0e"

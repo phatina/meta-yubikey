@@ -1,0 +1,53 @@
+From 05df3f9143568aae38fc57b5d142ac6e665e1340 Mon Sep 17 00:00:00 2001
+From: Edmundo Ferreira <edmundo.ferreira@esa.int>
+Date: Thu, 5 Dec 2019 10:04:11 +0100
+Subject: [PATCH] Adds autotools option for building without documentation
+
+- removes a2x dependency used for man page generation by configuring with:
+  ./configure --disable-documentation
+---
+ Makefile.am  | 3 +++
+ configure.ac | 8 ++++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/Makefile.am b/Makefile.am
+index 3182511..3340414 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -63,6 +63,8 @@ ykparse_LDADD = ./libyubikey.la
+ ykgenerate_SOURCES = ykgenerate.c
+ ykgenerate_LDADD = ./libyubikey.la
+ 
++# Man page
++if ENABLE_DOC
+ dist_man_MANS = modhex.1 ykparse.1 ykgenerate.1
+ DISTCLEANFILES = $(dist_man_MANS)
+ 
+@@ -72,6 +74,7 @@ SUFFIXES = .1.txt .1
+ 
+ MANSOURCES = modhex.1.txt ykparse.1.txt ykgenerate.1.txt
+ EXTRA_DIST = $(MANSOURCES) simple.mk THANKS
++endif
+ 
+ # Maintainer rules
+ 
+diff --git a/configure.ac b/configure.ac
+index c40b5ff..798976a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -53,6 +53,14 @@ AM_MISSING_PROG([A2X], a2x, $missing_dir)
+ gl_LD_VERSION_SCRIPT
+ gl_VALGRIND_TESTS
+ 
++# --disable-documentation
++AC_ARG_ENABLE([documentation],
++	      [AS_HELP_STRING([--disable-documentation],
++			     [do not build documentation])],
++			     [enable_doc="${enableval}" ],
++			     [enable_doc="yes"])
++AM_CONDITIONAL(ENABLE_DOC, test "$enable_doc" != "no")
++
+ AC_ARG_ENABLE([gcc-warnings],
+   [AS_HELP_STRING([--enable-gcc-warnings],
+ 		  [turn on lots of GCC warnings (for developers)])],
+
